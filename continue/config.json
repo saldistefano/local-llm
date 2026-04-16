@@ -1,0 +1,75 @@
+{
+  "models": [
+    {
+      "title": "Qwen Coder 14B (local)",
+      "provider": "ollama",
+      "model": "qwen-coder-14b",
+      "apiBase": "http://localhost:11434"
+    },
+    {
+      "title": "Qwen Coder 7B (fast)",
+      "provider": "ollama",
+      "model": "qwen-coder-7b",
+      "apiBase": "http://localhost:11434"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen Coder 7B (autocomplete)",
+    "provider": "ollama",
+    "model": "qwen-coder-7b",
+    "apiBase": "http://localhost:11434"
+  },
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text",
+    "apiBase": "http://localhost:11434"
+  },
+  "contextProviders": [
+    {
+      "name": "code",
+      "params": {}
+    },
+    {
+      "name": "docs",
+      "params": {}
+    },
+    {
+      "name": "diff",
+      "params": {}
+    },
+    {
+      "name": "terminal",
+      "params": {}
+    },
+    {
+      "name": "problems",
+      "params": {}
+    },
+    {
+      "name": "folder",
+      "params": {}
+    },
+    {
+      "name": "codebase",
+      "params": {}
+    }
+  ],
+  "slashCommands": [
+    {
+      "name": "edit",
+      "description": "Edit selected code"
+    },
+    {
+      "name": "comment",
+      "description": "Add comments to selected code"
+    },
+    {
+      "name": "share",
+      "description": "Export conversation as markdown"
+    },
+    {
+      "name": "cmd",
+      "description": "Generate a shell command"
+    }
+  ]
+}

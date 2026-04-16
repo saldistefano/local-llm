@@ -1,0 +1,58 @@
+#!/usr/bin/env zsh
+# llm-switch — toggle Claude Code between Anthropic API and local Ollama
+#
+# Usage:
+#   llm-switch local    → print eval-able exports for local Ollama
+#   llm-switch cloud    → print eval-able exports to restore Anthropic API
+#   llm-switch status   → show current active backend
+#   llm-switch help     → this message
+#
+# Recommended: add this to your shell function instead of calling directly.
+# Add to ~/.zshrc:
+#   llm() { eval "$(llm-switch $1)"; }
+# Then: llm local / llm cloud / llm status
+
+set -e
+
+case "${1:-help}" in
+  local)
+    cat <<'EOF'
+export ANTHROPIC_BASE_URL=http://localhost:11434
+export ANTHROPIC_API_KEY=ollama
+EOF
+    echo "# Switched to LOCAL (Ollama). Run: claude" >&2
+    echo "# Note: agentic tool use (file edits, bash) requires Anthropic auth." >&2
+    ;;
+
+  cloud)
+    cat <<'EOF'
+unset ANTHROPIC_BASE_URL
+unset ANTHROPIC_API_KEY
+EOF
+    echo "# Switched to CLOUD (Anthropic API). Run: claude" >&2
+    ;;
+
+  status)
+    if [[ -n "${ANTHROPIC_BASE_URL}" ]]; then
+      echo "ACTIVE: LOCAL  →  ${ANTHROPIC_BASE_URL}"
+    else
+      echo "ACTIVE: CLOUD  →  Anthropic API (default)"
+    fi
+    echo ""
+    echo "Ollama models available:"
+    ollama list 2>/dev/null || echo "  (Ollama not running — start with: brew services start ollama)"
+    ;;
+
+  help|*)
+    echo "Usage: llm-switch [local|cloud|status|help]"
+    echo ""
+    echo "  local   → switch Claude Code to local Ollama"
+    echo "  cloud   → switch Claude Code back to Anthropic API"
+    echo "  status  → show current backend + available models"
+    echo ""
+    echo "Since this script prints exports, use eval or add a wrapper function:"
+    echo "  Add to ~/.zshrc:"
+    echo "    llm() { eval \"\$(llm-switch \$1)\"; }"
+    echo "  Then use: llm local  /  llm cloud  /  llm status"
+    ;;
+esac
