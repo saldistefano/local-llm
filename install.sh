@@ -85,11 +85,11 @@ fi
 success "Ollama service running with performance tuning"
 
 # ── 4. Pull models ────────────────────────────────────────────────────────────
-info "Pulling Qwen2.5-Coder 14B (~9 GB)..."
-ollama pull qwen2.5-coder:14b
-success "qwen2.5-coder:14b downloaded"
+info "Pulling Qwen3.6 35B-A3B Q4_K_M (~24 GB) — MoE: 35B quality at 3B compute cost..."
+ollama pull qwen3.6:35b-a3b-q4_K_M
+success "qwen3.6:35b-a3b-q4_K_M downloaded"
 
-info "Pulling Qwen2.5-Coder 7B (~4.7 GB)..."
+info "Pulling Qwen2.5-Coder 7B (~4.7 GB) — fast model for quick queries..."
 ollama pull qwen2.5-coder:7b
 success "qwen2.5-coder:7b downloaded"
 
@@ -98,13 +98,13 @@ ollama pull nomic-embed-text
 success "nomic-embed-text downloaded"
 
 # ── 5. Create tuned modelfiles ────────────────────────────────────────────────
-info "Creating tuned model variants (qwen-coder-14b, qwen-coder-7b)..."
+info "Creating tuned model variants (qwen-coder-35b, qwen-coder-7b)..."
 
 mkdir -p "$HOME/.ollama/modelfiles"
-cp "$REPO_DIR/modelfiles/Modelfile.qwen14b" "$HOME/.ollama/modelfiles/"
+cp "$REPO_DIR/modelfiles/Modelfile.qwen36" "$HOME/.ollama/modelfiles/"
 cp "$REPO_DIR/modelfiles/Modelfile.qwen7b" "$HOME/.ollama/modelfiles/"
 
-ollama create qwen-coder-14b -f "$HOME/.ollama/modelfiles/Modelfile.qwen14b"
+ollama create qwen-coder-35b -f "$HOME/.ollama/modelfiles/Modelfile.qwen36"
 ollama create qwen-coder-7b  -f "$HOME/.ollama/modelfiles/Modelfile.qwen7b"
 
 success "Tuned models created"

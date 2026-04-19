@@ -1,9 +1,9 @@
 {
   "models": [
     {
-      "title": "Qwen Coder 14B (local)",
+      "title": "Qwen Coder 35B (local)",
       "provider": "ollama",
-      "model": "qwen-coder-14b",
+      "model": "qwen-coder-35b",
       "apiBase": "http://localhost:11434"
     },
     {

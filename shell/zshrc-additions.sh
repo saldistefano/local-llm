@@ -5,7 +5,7 @@
 alias claude-local='ANTHROPIC_BASE_URL=http://localhost:11434 ANTHROPIC_API_KEY=ollama claude'
 
 # Quick model chat without the full Claude Code wrapper
-alias qc='ollama run qwen-coder-14b'   # primary: ~25-30 tok/s
+alias qc='ollama run qwen-coder-35b'   # primary: ~50 tok/s (35B MoE, 3B active)
 alias qcf='ollama run qwen-coder-7b'   # fast:    ~50-60 tok/s
 
 # Add ~/bin to PATH for llm-switch and other local scripts
